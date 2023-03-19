@@ -53,7 +53,7 @@ exports.login = async (req,res) => {
                 res.json({token,payload});
             });
             
-            res.send('hello login');
+            // res.send('hello login');
 
         }else{
             return res.status(400).send('User not found !!');
