@@ -1,8 +1,15 @@
 const express = require('express');
+
 const router = express.Router();
 
 //controller
-const { register,login,listUser,editUser,deleteUser } = require('../controllers/auth')
+const { register,
+    login,
+    listUser,
+    editUser,
+    deleteUser,
+    currentUser, 
+} = require('../controllers/auth')
 
 //middleware
 const {auth} = require('../middleware/auth')
@@ -18,10 +25,10 @@ router.post("/register", register);
 //@Access    Public
 router.post("/login", login);
 
-
-router.get('/1',auth,(req,res)=>{
-    res.send('hello 1')
-})
+//@Endpoint  http://localhost:3000/api/current-user
+//@Method    POST
+//@Access    Private
+router.post("/current-user",auth, currentUser);
 
 
 //@Endpoint  http://localhost:3000/api/auth
