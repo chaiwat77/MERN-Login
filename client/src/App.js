@@ -18,6 +18,9 @@ import HomeUser from './component/pages/user/Home'
 import { currentUser } from "./component/functions/auth";
 // redux
 import { useDispatch } from 'react-redux';
+//Rouute
+import UserRoute from "./component/routes/UserRoute";
+import AdminRoute from "./component/routes/AdminRoute";
 
 
 function App() {
@@ -52,8 +55,20 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
       
-        <Route path="/admin/index" element={<HomeAdmin/>}/>
-        <Route path="/user/index" element={<HomeUser/>}/>
+        <Route 
+        path="/admin/index"
+        element={
+          <AdminRoute>
+            <HomeAdmin/>
+          </AdminRoute>      
+        }/>
+        <Route 
+        path="/user/index" 
+        element={
+          <UserRoute>
+            <HomeUser/>
+          </UserRoute>
+        }/>
 
       </Routes>
 
