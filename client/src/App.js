@@ -12,6 +12,8 @@ import Home from "./component/pages/Home";
 import Navbar from "./component/layouts/Navbar"
 //page admin
 import HomeAdmin from './component/pages/admin/Home'
+import ManageAdmin from "./component/pages/admin/ManageAdmin";
+
 //page user
 import HomeUser from './component/pages/user/Home'
 //function
@@ -60,6 +62,14 @@ function App() {
         element={
           <AdminRoute>
             <HomeAdmin/>
+          </AdminRoute>      
+        }/>
+
+        <Route 
+        path="/admin/manage-admin"
+        element={
+          <AdminRoute>
+            <ManageAdmin/>
           </AdminRoute>      
         }/>
         <Route 
