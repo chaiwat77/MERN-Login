@@ -1,15 +1,18 @@
 import { Menu } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import { HomeOutlined,UserAddOutlined,LoginOutlined,LogoutOutlined,CaretDownOutlined } from '@ant-design/icons'
 
 //redux
-import { useDispatch } from 'react-redux';
-
+import { useDispatch,useSelector } from 'react-redux';
 
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { user } = useSelector((state) => ({...state}));
+  // console.log(user);
+  const { SubMenu } = Menu;
+ 
   const logout = () =>{
       dispatch({
         type: 'LOGOUT',
@@ -18,23 +21,52 @@ const Navbar = () => {
       navigate('/');
   }
 
+
   return (
     <Menu mode="horizontal">
-      <Menu.Item key="home">
+      <Menu.Item 
+      key="home" 
+      icon={<HomeOutlined />}
+      >
         <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="login">
-        <Link to="/login">Login</Link>
-      </Menu.Item>
-      <Menu.Item key="register">
-        <Link to="/register">Register</Link>
-      </Menu.Item>
-      <Menu.Item 
-      key="logout" 
-      onClick={logout}
-      >
-        logout
-      </Menu.Item>
+
+      {/* ถ้าไม่มี user จะแสดง register  */}
+      {!user && 
+      <>
+        <Menu.Item 
+          key="login" 
+          icon={<UserAddOutlined />}
+        >
+          <Link to="/login">Login</Link>
+        </Menu.Item>
+
+        <Menu.Item 
+          key="register" 
+          icon={<LoginOutlined />}
+        >
+          <Link to="/register">Register</Link>
+        </Menu.Item>
+      </>}
+      
+      {/* ถ้ามี user login อยู่ จะแสดง logout  */}
+      {user && 
+      <>
+        <SubMenu
+            key="SubMenu"
+            icon={<CaretDownOutlined />}
+            title={user.username}
+          >
+            <Menu.Item 
+            icon={<LogoutOutlined />}
+            key="setting:1" onClick={logout}>
+              Logout
+            </Menu.Item>
+
+          </SubMenu>
+
+      </>}
+      
     </Menu>
   );
 };

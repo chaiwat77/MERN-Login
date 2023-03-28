@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-
+import { toast } from 'react-toastify';
 
 //function
 import { login } from '../../functions/auth'
@@ -41,7 +41,7 @@ const handdleSubmit = (e)=>{
     login(value)
       .then(res=>{
           console.log(res.data)
-          alert(res.data)
+          toast.info(res.data.payload.user.username +" Login Success")
           
           dispatch({
             type: 'LOGIN',
@@ -57,21 +57,44 @@ const handdleSubmit = (e)=>{
          
       }).catch((err)=>{
           console.log(err.response.data)
-          alert(err.response.data)
+          toast.error(err.response.data)
       });
 };
 
   return (
+      
+      <div className='container p-5'>
+        <h1>Login Form</h1>
+        <div className='row'>
+          <div className='col-md-6 offset-md-3'>
+            <form onSubmit={handdleSubmit}>
+                <div className='form-group'>
+                  <label >Username</label>
+                  <input type="text" 
+                  name='username' 
+                  onChange={handdleChange}
+                  className='form-control'
+                  />
+                </div>
 
-    <div>
-        <form onSubmit={handdleSubmit}>
-            <label >Username</label>
-            <input type="text" name='username' onChange={handdleChange}/>
-            <label >Password</label>
-            <input type="text" name='password' onChange={handdleChange}/>
-            <button >submit</button>
-        </form>
-    </div>
+                <div className='form-group'>
+                  <label >Password</label>
+                  <input 
+                  type="text" 
+                  name='password' 
+                  onChange={handdleChange}
+                  className='form-control'
+                  />
+                </div>
+
+                <div style={{padding: '10px'}}>
+                  <button className='btn btn-success' >submit</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    
   )
 }
 

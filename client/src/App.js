@@ -1,6 +1,8 @@
 
 import React,{ useState,useEffect } from "react";
 import { Routes,Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //page
 import Login from "./component/pages/auth/Login";
@@ -50,6 +52,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Navbar/>
       {/* <RouterProvider router={router} /> */}
       <Routes>
