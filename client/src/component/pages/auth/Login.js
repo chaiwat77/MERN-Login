@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 import { toast } from 'react-toastify';
-
+import { Spin } from 'antd';
 //function
 import { login } from '../../functions/auth'
 
@@ -17,6 +17,8 @@ const Login = () => {
     username:"",
     password:"",
 });
+
+const [loading, setLoading] = useState(false)
 
 const roleBaseRedirect = (role) =>{
   console.log(role);
@@ -36,10 +38,14 @@ const roleBaseRedirect = (role) =>{
 };
 
 const handdleSubmit = (e)=>{
+  // กดส่งไปเปลี่ยนเป็น true
+  setLoading(true)
   e.preventDefault()
   console.log(value);
     login(value)
-      .then(res=>{
+    .then(res=>{
+        //ได้รับ response จาก sv แล้ว
+          setLoading(false)
           console.log(res.data)
           toast.info(res.data.payload.user.username +" Login Success")
           
@@ -56,6 +62,7 @@ const handdleSubmit = (e)=>{
           roleBaseRedirect(res.data.payload.user.role);
          
       }).catch((err)=>{
+          // setLoading(false)
           console.log(err.response.data)
           toast.error(err.response.data)
       });
@@ -64,9 +71,14 @@ const handdleSubmit = (e)=>{
   return (
       
       <div className='container p-5'>
-        <h1>Login Form</h1>
+        {/* <h1>Login Page</h1> */}
         <div className='row'>
           <div className='col-md-6 offset-md-3'>
+            {loading
+            ? <h1>Loading... <Spin size="large" delay={500}/></h1>
+          
+            : <h1>Login page</h1>
+            }
             <form onSubmit={handdleSubmit}>
                 <div className='form-group'>
                   <label >Username</label>
