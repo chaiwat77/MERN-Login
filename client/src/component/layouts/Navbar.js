@@ -1,72 +1,68 @@
-import { Menu } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { HomeOutlined,UserAddOutlined,LoginOutlined,LogoutOutlined,CaretDownOutlined } from '@ant-design/icons'
+import { Menu } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  HomeOutlined,
+  UserAddOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  CaretDownOutlined,
+} from "@ant-design/icons";
 
 //redux
-import { useDispatch,useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => ({...state}));
+  const { user } = useSelector((state) => ({ ...state }));
   // console.log(user);
   const { SubMenu } = Menu;
- 
-  const logout = () =>{
-      dispatch({
-        type: 'LOGOUT',
-        payload: null
-      });
-      navigate('/');
-  }
 
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    navigate("/");
+  };
 
   return (
     <Menu mode="horizontal">
-      <Menu.Item 
-      key="home" 
-      icon={<HomeOutlined />}
-      >
+      <Menu.Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Menu.Item>
 
       {/* ถ้าไม่มี user จะแสดง register  */}
-      {!user && 
-      <>
-        <Menu.Item 
-          key="login" 
-          icon={<UserAddOutlined />}
-        >
-          <Link to="/login">Login</Link>
-        </Menu.Item>
+      {!user && (
+        <>
+          <Menu.Item key="login" icon={<UserAddOutlined />}>
+            <Link to="/login">Login</Link>
+          </Menu.Item>
 
-        <Menu.Item 
-          key="register" 
-          icon={<LoginOutlined />}
-        >
-          <Link to="/register">Register</Link>
-        </Menu.Item>
-      </>}
-      
+          <Menu.Item key="register" icon={<LoginOutlined />}>
+            <Link to="/register">Register</Link>
+          </Menu.Item>
+        </>
+      )}
+
       {/* ถ้ามี user login อยู่ จะแสดง logout  */}
-      {user && 
-      <>
-        <SubMenu
+      {user && (
+        <>
+          <SubMenu
             key="SubMenu"
             icon={<CaretDownOutlined />}
             title={user.username}
           >
-            <Menu.Item 
-            icon={<LogoutOutlined />}
-            key="setting:1" onClick={logout}>
+            <Menu.Item
+              icon={<LogoutOutlined />}
+              key="setting:1"
+              onClick={logout}
+            >
               Logout
             </Menu.Item>
-
           </SubMenu>
-
-      </>}
-      
+        </>
+      )}
     </Menu>
   );
 };

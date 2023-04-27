@@ -1,12 +1,10 @@
-import axios  from 'axios'
+import axios from "axios";
 
+export const register = async (value) =>
+  await axios.post(process.env.REACT_APP_API + "/register", value);
 
-export const register = async(value)=>
-    await axios.post(process.env.REACT_APP_API+'/register',value);
-
-
-export const login = async(value)=>
-    await axios.post(process.env.REACT_APP_API+'/login',value);
+export const login = async (value) =>
+  await axios.post(process.env.REACT_APP_API + "/login", value);
 
 // export const currentUser = async(authtoken)=>
 //     await axios.post(process.env.REACT_APP_API+'/current-user',
@@ -19,27 +17,28 @@ export const login = async(value)=>
 // );
 
 // ไว้เทส consol.log()
-export const currentUser = async(authtoken)=> {
-    console.log(authtoken);
-    return await axios.post(process.env.REACT_APP_API+'/current-user',
+export const currentUser = async (authtoken) => {
+  console.log(authtoken);
+  return await axios.post(
+    process.env.REACT_APP_API + "/current-user",
     {},
     {
-        headers: {
-            authtoken,
-        },
+      headers: {
+        authtoken,
+      },
     }
-    );
-}
+  );
+};
 
-export const currentAdmin = async(authtoken)=> {
-    console.log(authtoken);
-    return await axios.post(process.env.REACT_APP_API+'/current-admin',
+export const currentAdmin = async (authtoken) => {
+  console.log(authtoken);
+  return await axios.post(
+    process.env.REACT_APP_API + "/current-admin",
     {},
     {
-        headers: {
-            authtoken,
-        },
+      headers: {
+        authtoken,
+      },
     }
-    );
-}
-
+  );
+};
