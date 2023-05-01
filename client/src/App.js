@@ -14,6 +14,7 @@ import Navbar from "./component/layouts/Navbar";
 //page admin
 import HomeAdmin from "./component/pages/admin/Home";
 import ManageAdmin from "./component/pages/admin/ManageAdmin";
+import CreateCategory from "./component/pages/admin/CreateCategory";
 
 //page user
 import HomeUser from "./component/pages/user/Home";
@@ -70,6 +71,14 @@ function App() {
           element={
             <AdminRoute>
               <ManageAdmin />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/create-category"
+          element={
+            <AdminRoute>
+              <CreateCategory />
             </AdminRoute>
           }
         />
