@@ -14,7 +14,8 @@ import Navbar from "./component/layouts/Navbar";
 //page admin
 import HomeAdmin from "./component/pages/admin/Home";
 import ManageAdmin from "./component/pages/admin/ManageAdmin";
-import CreateCategory from "./component/pages/admin/CreateCategory";
+import CreateCategory from "./component/pages/admin/category/CreateCategory";
+import UpdateCategory from "./component/pages/admin/category/UpdateCategory";
 
 //page user
 import HomeUser from "./component/pages/user/Home";
@@ -79,6 +80,14 @@ function App() {
           element={
             <AdminRoute>
               <CreateCategory />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/update-category/:id"
+          element={
+            <AdminRoute>
+              <UpdateCategory />
             </AdminRoute>
           }
         />
