@@ -14,6 +14,9 @@ const MenubarAdmin = () => {
         <li class="nav-item">
           <Link to="/admin/create-category">จัดการ Category</Link>
         </li>
+        <li class="nav-item">
+          <Link to="/admin/create-product">เพิ่ม Product</Link>
+        </li>
       </ul>
     </nav>
   );

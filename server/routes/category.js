@@ -13,10 +13,10 @@ const {
 //midleware
 const { auth, adminCheck } = require("../middleware/auth");
 //Endpoint http://127.0.0.1:5000/api/category/
-router.get("/category", list);
-router.post("/category", create);
-router.get("/category/:id", read);
-router.put("/category/:id", update);
-router.delete("/category/:id", remove);
+router.get("/category", auth, adminCheck, list);
+router.post("/category", auth, adminCheck, create);
+router.get("/category/:id", auth, adminCheck, read);
+router.put("/category/:id", auth, adminCheck, update);
+router.delete("/category/:id", auth, adminCheck, remove);
 
 module.exports = router;

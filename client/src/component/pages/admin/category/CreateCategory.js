@@ -9,8 +9,15 @@ import {
 } from "../../../functions/category";
 
 import { Link } from "react-router-dom";
+//Redux
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const CreateCategory = () => {
+  const { user } = useSelector((state) => ({ ...state }));
+
+  console.log("test redux", user.token);
+
   const [values, setValues] = useState({
     name: "",
   });
@@ -18,11 +25,11 @@ const CreateCategory = () => {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    loadData();
+    loadData(user.token);
   }, []);
 
-  const loadData = () => {
-    listCategory()
+  const loadData = (authtoken) => {
+    listCategory(authtoken)
       .then((res) => {
         setCategory(res.data);
       })
@@ -38,24 +45,28 @@ const CreateCategory = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createCategory(values)
+    createCategory(user.token, values)
       .then((res) => {
         console.log(res);
         //เมื่อมีการ submit จะเรียกใช้ loaddata เพื่อ refresh ข้อมูล
-        loadData();
+        loadData(user.token);
+        toast.success("Add Category Success!");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error!! Add Category ");
       });
   };
   const handleDelete = (id) => {
-    deleteCategory(id)
+    deleteCategory(user.token, id)
       .then((res) => {
         console.log(res);
-        loadData();
+        loadData(user.token);
+        toast.success("Delete Category Success!");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Error!! Delete Category ");
       });
   };
 

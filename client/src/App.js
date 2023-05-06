@@ -16,6 +16,7 @@ import HomeAdmin from "./component/pages/admin/Home";
 import ManageAdmin from "./component/pages/admin/ManageAdmin";
 import CreateCategory from "./component/pages/admin/category/CreateCategory";
 import UpdateCategory from "./component/pages/admin/category/UpdateCategory";
+import CreateProduct from "./component/pages/admin/product/CreateProduct";
 
 //page user
 import HomeUser from "./component/pages/user/Home";
@@ -88,6 +89,14 @@ function App() {
           element={
             <AdminRoute>
               <UpdateCategory />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/create-product"
+          element={
+            <AdminRoute>
+              <CreateProduct />
             </AdminRoute>
           }
         />

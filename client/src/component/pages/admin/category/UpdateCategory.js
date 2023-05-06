@@ -5,19 +5,21 @@ import MenubarAdmin from "../../../layouts/MenubarAdmin";
 import { readCategory, editCategory } from "../../../functions/category";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const UpdateCategory = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const navigate = useNavigate();
   const param = useParams();
 
   const [name, setName] = useState("");
 
   useEffect(() => {
-    loadData(param.id);
+    loadData(user.token, param.id);
   }, []);
 
-  const loadData = (id) => {
-    readCategory(id)
+  const loadData = (authtoken, id) => {
+    readCategory(authtoken, id)
       .then((res) => {
         setName(res.data.name);
       })
@@ -30,7 +32,7 @@ const UpdateCategory = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editCategory(param.id, { name })
+    editCategory(user.token, param.id, { name })
       .then((res) => {
         navigate("/admin/create-category");
         toast.success("Update " + res.data.name + " Success!");
