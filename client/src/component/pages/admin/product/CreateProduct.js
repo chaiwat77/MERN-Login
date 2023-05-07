@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import MenubarAdmin from "../../../layouts/MenubarAdmin";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 //function
 import { createProduct } from "../../../functions/product";
 import { listCategory } from "../../../functions/category";
+import FileUpload from "./FileUpload";
 
 const initialstate = {
   title: "",
@@ -20,6 +23,7 @@ const initialstate = {
 const CreateProduct = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [values, setValues] = useState(initialstate);
+  const [loading, setLoading] = useState(false);
   //   console.log("product page", user);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ const CreateProduct = () => {
       });
   };
 
-  console.log("value", values);
+  console.log("values", values);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -64,9 +68,16 @@ const CreateProduct = () => {
         <div class="col-md-2">
           <MenubarAdmin />
         </div>
-
+        <br />
         <div class="col">
-          <h1>Create Product Page </h1>
+          {loading ? (
+            <h1>
+              Loading..... <Spin size="large" />
+            </h1>
+          ) : (
+            <h1>Create Product Page </h1>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>title</label>
@@ -140,6 +151,12 @@ const CreateProduct = () => {
                   ))}
               </select>
             </div>
+            <FileUpload
+              values={values}
+              setValues={setValues}
+              loading={loading}
+              setLoading={setLoading}
+            />
             <button className="btn btn-primary">Add</button>
           </form>
         </div>
