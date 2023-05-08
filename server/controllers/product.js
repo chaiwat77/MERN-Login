@@ -10,7 +10,13 @@ exports.create = async (req, res) => {
 };
 exports.list = async (req, res) => {
   try {
-    const product = await Product.find().populate("category");
+    const count = parseInt(req.params.count);
+    console.log(count);
+    // populate คือการ join ข้อมูล
+    const product = await Product.find()
+      .limit(5)
+      .populate("category")
+      .sort([["createdAt", "desc"]]);
     res.send(product);
   } catch (err) {
     res.status(500).send("Server Error !!");
