@@ -11,12 +11,12 @@ export const createProduct = async (authtoken, value) => {
 export const listProduct = async (count) =>
   await axios.get(process.env.REACT_APP_API + "/product/" + "count");
 
-// export const deleteCategory = async (authtoken, id) =>
-//   await axios.delete(process.env.REACT_APP_API + "/category/" + id, {
-//     headers: {
-//       authtoken,
-//     },
-//   });
+export const removeProduct = async (authtoken, id) =>
+  await axios.delete(process.env.REACT_APP_API + "/product/" + id, {
+    headers: {
+      authtoken,
+    },
+  });
 
 // export const readCategory = async (authtoken, id) =>
 //   await axios.get(process.env.REACT_APP_API + "/category/" + id, {

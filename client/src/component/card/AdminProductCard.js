@@ -2,9 +2,9 @@ import React from "react";
 import { Card } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const AdminProductCard = ({ product }) => {
-  console.log(product);
-  const { title, description, images } = product;
+const AdminProductCard = ({ product, handleRemove }) => {
+  // console.log(product);
+  const { _id, title, description, images } = product;
   const { Meta } = Card;
 
   return (
@@ -21,7 +21,10 @@ const AdminProductCard = ({ product }) => {
         }
         actions={[
           <EditOutlined key="edit" className="text-warning" />,
-          <DeleteOutlined className="text-danger" />,
+          <DeleteOutlined
+            className="text-danger"
+            onClick={() => handleRemove(_id)}
+          />,
         ]}
       >
         <Meta title={title} description={description} />

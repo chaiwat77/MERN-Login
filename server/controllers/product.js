@@ -14,10 +14,21 @@ exports.list = async (req, res) => {
     console.log(count);
     // populate คือการ join ข้อมูล
     const product = await Product.find()
-      .limit(5)
+      .limit(100)
       .populate("category")
       .sort([["createdAt", "desc"]]);
     res.send(product);
+  } catch (err) {
+    res.status(500).send("Server Error !!");
+  }
+};
+
+exports.removeProduct = async (req, res) => {
+  try {
+    const deleted = await Product.findOneAndRemove({
+      _id: req.params.id,
+    }).exec();
+    res.send(deleted);
   } catch (err) {
     res.status(500).send("Server Error !!");
   }
