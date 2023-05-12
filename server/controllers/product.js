@@ -27,8 +27,37 @@ exports.removeProduct = async (req, res) => {
   try {
     const deleted = await Product.findOneAndRemove({
       _id: req.params.id,
-    }).exec();
+    })
+      .populate("category")
+      .exec();
     res.send(deleted);
+  } catch (err) {
+    res.status(500).send("Server Error !!");
+  }
+};
+
+exports.read = async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      _id: req.params.id,
+    }).exec();
+  } catch (err) {
+    res.status(500).send("Server Error !!");
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      {
+        _id: req.params.id,
+      },
+      req.body,
+      {
+        new: true,
+      }
+    ).exec();
+    res.send(product);
   } catch (err) {
     res.status(500).send("Server Error !!");
   }
