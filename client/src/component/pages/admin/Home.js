@@ -30,7 +30,7 @@ const Home = () => {
   };
 
   const handleRemove = (id) => {
-    console.log(id);
+    // console.log(id);
     if (window.confirm("Delete ?")) {
       removeProduct(user.token, id)
         .then((res) => {

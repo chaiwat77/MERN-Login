@@ -55,6 +55,7 @@ const CreateProduct = () => {
       .then((res) => {
         console.log(res);
         toast.success("Add " + res.data.title + " Success!!");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

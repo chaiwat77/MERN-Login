@@ -17,12 +17,17 @@ const ManageAdmin = () => {
   const { user } = useSelector((state) => ({ ...state }));
   // console.log(user);
   const [data, setData] = useState([]);
+  const [selectData, setSelectData] = useState([]);
   // console.log(data);
+
   const [values, setValues] = useState({
     id: "",
     password: "",
   });
   // console.log(values);
+
+  // ข้อมูลที่ใช้ Loop ใน dropdown
+  const [drop, setDrop] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = (id) => {
@@ -59,6 +64,10 @@ const ManageAdmin = () => {
       // ถ้ามีการติดต่อหลังบ้าน ควรมี then ด้วย
       .then((res) => {
         setData(res.data);
+        setSelectData(res.data);
+        const dataDrop = [...new Set(res.data.map((item) => item.role))];
+        setDrop(dataDrop);
+        // console.log(dataDrop);
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -110,6 +119,19 @@ const ManageAdmin = () => {
     }
   };
 
+  const handleSelectRole = (e) => {
+    const value = e.target.value;
+    if (value == "all") {
+      setSelectData(data);
+    } else {
+      const filterData = data.filter((item, index) => {
+        return item.role == value;
+      });
+      // console.log(filterData);
+      setSelectData(filterData);
+    }
+  };
+
   return (
     <div class="container-fluid">
       <div clsas="row">
@@ -119,6 +141,15 @@ const ManageAdmin = () => {
 
         <div class="col">
           <h1>Manage Admin</h1>
+
+          <select onChange={(e) => handleSelectRole(e)}>
+            <option value="all">all</option>
+            {drop.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -131,7 +162,7 @@ const ManageAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {selectData.map((item, index) => (
                 <tr>
                   <th scope="row">{item.username}</th>
                   <td>

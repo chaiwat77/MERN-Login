@@ -8,6 +8,7 @@ const {
   removeProduct,
   read,
   update,
+  listBy,
 } = require("../controllers/product");
 //midleware
 const { auth, adminCheck } = require("../middleware/auth");
@@ -15,7 +16,12 @@ const { auth, adminCheck } = require("../middleware/auth");
 router.post("/product", auth, adminCheck, create);
 router.get("/product/:count", list);
 router.delete("/product/:id", auth, adminCheck, removeProduct);
-router.get("/prouducts/:id", read);
-router.put("/prouduct/:id", auth, adminCheck, update);
+
+//update
+//http://localhost:5000/api/products
+router.get("/products/:id", read);
+router.put("/product/:id", auth, adminCheck, update);
+
+router.post("/productby/", listBy);
 
 module.exports = router;

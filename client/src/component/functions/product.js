@@ -18,18 +18,20 @@ export const removeProduct = async (authtoken, id) =>
     },
   });
 
-// export const readCategory = async (authtoken, id) =>
-//   await axios.get(process.env.REACT_APP_API + "/category/" + id, {
-//     headers: {
-//       authtoken,
-//     },
-//   });
+//update
+export const readProduct = async (id) =>
+  await axios.get(process.env.REACT_APP_API + "/products/" + id);
 
-// export const editCategory = async (authtoken, id, value) => {
-//   // console.log(value);
-//   return await axios.put(process.env.REACT_APP_API + "/category/" + id, value, {
-//     headers: {
-//       authtoken,
-//     },
-//   });
-// };
+export const updateProduct = async (authtoken, id, product) =>
+  await axios.put(process.env.REACT_APP_API + "/product/" + id, product, {
+    headers: {
+      authtoken,
+    },
+  });
+
+export const listProductBy = async (sort, order, limit) =>
+  await axios.post(process.env.REACT_APP_API + "/productby", {
+    sort,
+    order,
+    limit,
+  });

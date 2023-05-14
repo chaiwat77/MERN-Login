@@ -1,10 +1,10 @@
 import React from "react";
 import { Card } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const { Meta } = Card;
-const AdminProductCard = ({ product, handleRemove }) => {
+const ProductCard = ({ product }) => {
   // console.log(product);
   const { _id, title, description, images } = product;
 
@@ -23,13 +23,13 @@ const AdminProductCard = ({ product, handleRemove }) => {
           />
         }
         actions={[
-          <Link to={"/admin/update-product/" + _id}>
-            <EditOutlined className="text-warning" />
+          <Link to={"/product/" + _id}>
+            <EyeOutlined className="text-warning" />
           </Link>,
 
-          <DeleteOutlined
+          <ShoppingCartOutlined
             className="text-danger"
-            onClick={() => handleRemove(_id)}
+            // onClick={() => handleRemove(_id)}
           />,
         ]}
       >
@@ -39,4 +39,4 @@ const AdminProductCard = ({ product, handleRemove }) => {
   );
 };
 
-export default AdminProductCard;
+export default ProductCard;

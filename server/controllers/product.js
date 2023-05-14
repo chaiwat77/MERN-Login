@@ -11,10 +11,10 @@ exports.create = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     const count = parseInt(req.params.count);
-    console.log(count);
+    // console.log(count);
     // populate คือการ join ข้อมูล
     const product = await Product.find()
-      .limit(100)
+      .limit(count)
       .populate("category")
       .sort([["createdAt", "desc"]]);
     res.send(product);
@@ -41,6 +41,7 @@ exports.read = async (req, res) => {
     const product = await Product.findOne({
       _id: req.params.id,
     }).exec();
+    res.send(product);
   } catch (err) {
     res.status(500).send("Server Error !!");
   }
@@ -60,5 +61,18 @@ exports.update = async (req, res) => {
     res.send(product);
   } catch (err) {
     res.status(500).send("Server Error !!");
+  }
+};
+
+exports.listBy = async (req, res) => {
+  try {
+    const { sort, order, limit } = req.body;
+    const product = await Product.find()
+      .limit(limit)
+      .populate("category")
+      .sort([[sort, order]]);
+    res.send(product);
+  } catch (err) {
+    res.status(500).send("ListBy Error !!");
   }
 };

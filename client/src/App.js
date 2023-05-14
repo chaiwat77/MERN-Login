@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./component/pages/auth/Login";
 import Register from "./component/pages/auth/Register";
 import Home from "./component/pages/Home";
+import Product from "./component/pages/Product";
+
 // import router from "./component/routes/root";
 
 //Layout
@@ -59,6 +61,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/product/:id" element={<Product />} />
 
         <Route
           path="/admin/index"
