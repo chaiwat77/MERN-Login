@@ -6,10 +6,12 @@ import {
   LoginOutlined,
   LogoutOutlined,
   CaretDownOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import Search from "../card/Search";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,9 @@ const Navbar = () => {
     <Menu mode="horizontal">
       <Menu.Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
+      </Menu.Item>
+      <Menu.Item key="shop" icon={<ShoppingCartOutlined />}>
+        <Link to="/shop">Shop</Link>
       </Menu.Item>
 
       {/* ถ้าไม่มี user จะแสดง register  */}
@@ -63,6 +68,9 @@ const Navbar = () => {
           </SubMenu>
         </>
       )}
+      <span style={{ float: "right" }} className="p-1">
+        <Search />
+      </span>
     </Menu>
   );
 };

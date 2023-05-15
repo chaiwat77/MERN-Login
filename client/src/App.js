@@ -8,6 +8,7 @@ import Login from "./component/pages/auth/Login";
 import Register from "./component/pages/auth/Register";
 import Home from "./component/pages/Home";
 import Product from "./component/pages/Product";
+import Shop from "./component/pages/Shop";
 
 // import router from "./component/routes/root";
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/shop" element={<Shop />} />
 
         <Route
           path="/admin/index"

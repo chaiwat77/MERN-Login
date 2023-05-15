@@ -11,9 +11,11 @@ exports.create = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     const count = parseInt(req.params.count);
+
     // console.log(count);
     // populate คือการ join ข้อมูล
     const product = await Product.find()
+
       .limit(count)
       .populate("category")
       .sort([["createdAt", "desc"]]);

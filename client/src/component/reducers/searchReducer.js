@@ -1,0 +1,19 @@
+export function searchReducer(state = { text: "" }, action) {
+  switch (action.type) {
+    case "SEARCH_QUERY":
+      // ส่ง object ออกไปโดย copy state ,action
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+}
+
+// export function searchReducer(state = { text: "" }, action) {
+//   switch (action.type) {
+//     case "SEARCH_QUERY":
+//       return { ...state, ...action.payload };
+
+//     default:
+//       return state;
+//   }
+// }
