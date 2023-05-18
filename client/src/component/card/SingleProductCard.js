@@ -4,12 +4,33 @@ import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import { useSelector, useDispatch } from "react-redux";
+
+import _ from "lodash";
 
 const { Meta } = Card;
 const { Tabpane } = Tabs;
 const SingleProductCard = ({ product }) => {
   const { _id, title, description, images, price, sold, quantity, category } =
     product;
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    let cart = [];
+    if (localStorage.getItem("cart")) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    }
+    cart.push({ ...product, count: 1 });
+
+    let unique = _.uniqWith(cart, _.isEqual);
+
+    //ชื่อที่ส่งไปเก็บคือ cart ตอนเรียกใช้ต้องเรียกใช้ cart
+    localStorage.setItem("cart", JSON.stringify(unique));
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: unique,
+    });
+  };
 
   return (
     <>
@@ -40,7 +61,7 @@ const SingleProductCard = ({ product }) => {
             <>
               <ShoppingCartOutlined
                 className="text-danger"
-                // onClick={() => handleRemove(_id)}
+                onClick={handleAddToCart}
               />
               Add to Cart
             </>,

@@ -9,6 +9,7 @@ const {
   read,
   update,
   listBy,
+  searchFilters,
 } = require("../controllers/product");
 //midleware
 const { auth, adminCheck } = require("../middleware/auth");
@@ -23,5 +24,10 @@ router.get("/products/:id", read);
 router.put("/product/:id", auth, adminCheck, update);
 
 router.post("/productby/", listBy);
+
+//Search
+//http://localhost:5000/api/search/filters
+
+router.post("/search/filters", searchFilters);
 
 module.exports = router;

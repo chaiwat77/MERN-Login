@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// dispatch ใช้สำหรับ update ค่าใน store
 const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Search = () => {
 
   const handleChange = (e) => {
     // console.log(e.target.value);
+
     dispatch({
       type: "SEARCH_QUERY",
       payload: { text: e.target.value },
