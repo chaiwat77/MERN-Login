@@ -7,6 +7,9 @@ import { Carousel } from "react-responsive-carousel";
 import { useSelector, useDispatch } from "react-redux";
 
 import _ from "lodash";
+import { toast } from "react-toastify";
+//function
+import { addToWishList } from "../functions/users";
 
 const { Meta } = Card;
 const { Tabpane } = Tabs;
@@ -14,6 +17,7 @@ const SingleProductCard = ({ product }) => {
   const { _id, title, description, images, price, sold, quantity, category } =
     product;
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({ ...state }));
 
   const handleAddToCart = () => {
     let cart = [];
@@ -30,6 +34,27 @@ const SingleProductCard = ({ product }) => {
       type: "ADD_TO_CART",
       payload: unique,
     });
+
+    dispatch({
+      type: "SET_VISIBLE",
+      payload: true,
+    });
+  };
+
+  const handleAddtoWishList = (e) => {
+    if (user) {
+      addToWishList(user.token, _id)
+        .then((res) => {
+          console.log(res.data);
+          toast.success("Add to Wishlist Success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      toast.error("Please Login");
+      return;
+    }
   };
 
   return (
@@ -53,17 +78,17 @@ const SingleProductCard = ({ product }) => {
         <h1 className="bg-info p-3">{title}</h1>
         <Card
           actions={[
-            <Link to={"/"}>
+            <a onClick={handleAddtoWishList}>
               <HeartOutlined className="text-info" />
               <br />
               Add to list
-            </Link>,
+            </a>,
             <>
-              <ShoppingCartOutlined
-                className="text-danger"
-                onClick={handleAddToCart}
-              />
-              Add to Cart
+              <a onClick={handleAddToCart}>
+                <ShoppingCartOutlined className="text-danger" />
+                <br />
+                Add to Cart
+              </a>
             </>,
           ]}
         >

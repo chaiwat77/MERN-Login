@@ -9,6 +9,7 @@ import Register from "./component/pages/auth/Register";
 import Home from "./component/pages/Home";
 import Product from "./component/pages/Product";
 import Shop from "./component/pages/Shop";
+import Cart from "./component/pages/Cart";
 
 // import router from "./component/routes/root";
 
@@ -24,6 +25,10 @@ import UpdateProduct from "./component/pages/admin/product/UpdateProduct";
 
 //page user
 import HomeUser from "./component/pages/user/Home";
+import Checkout from "./component/pages/Checkout";
+import WishList from "./component/pages/user/WishList";
+import History from "./component/pages/user/History";
+
 //function
 import { currentUser } from "./component/functions/auth";
 // redux
@@ -31,6 +36,8 @@ import { useDispatch } from "react-redux";
 //Rouute
 import UserRoute from "./component/routes/UserRoute";
 import AdminRoute from "./component/routes/AdminRoute";
+//Drawer
+import SideDrawer from "./component/drawer/SideDrawer";
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +64,7 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Navbar />
+      <SideDrawer />
       {/* <RouterProvider router={router} /> */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -64,6 +72,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
 
         <Route
           path="/admin/index"
@@ -119,6 +128,30 @@ function App() {
           element={
             <UserRoute>
               <HomeUser />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <UserRoute>
+              <Checkout />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/user/wishlist"
+          element={
+            <UserRoute>
+              <WishList />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/user/history"
+          element={
+            <UserRoute>
+              <History />
             </UserRoute>
           }
         />

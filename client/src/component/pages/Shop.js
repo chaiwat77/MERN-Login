@@ -111,9 +111,11 @@ const Shop = () => {
             <hr />
             <h3>ค้นหาตามหมวดหมู่</h3>
             {category.map((item, index) => (
-              <Checkbox value={item._id} onChange={handleCheck}>
-                {item.name}
-              </Checkbox>
+              <div style={{ display: "flex" }}>
+                <Checkbox value={item._id} onChange={handleCheck}>
+                  {item.name}
+                </Checkbox>
+              </div>
             ))}
           </div>
           <div className="col-md-9">

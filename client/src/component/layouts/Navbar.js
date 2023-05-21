@@ -1,4 +1,4 @@
-import { Menu } from "antd";
+import { Menu, Badge } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import {
   HomeOutlined,
@@ -7,6 +7,8 @@ import {
   LogoutOutlined,
   CaretDownOutlined,
   ShoppingCartOutlined,
+  ShopOutlined,
+  DashboardTwoTone,
 } from "@ant-design/icons";
 
 //redux
@@ -16,7 +18,7 @@ import Search from "../card/Search";
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, cart } = useSelector((state) => ({ ...state }));
   // console.log(user);
   const { SubMenu } = Menu;
 
@@ -33,8 +35,18 @@ const Navbar = () => {
       <Menu.Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="shop" icon={<ShoppingCartOutlined />}>
+
+      <div style={{ flex: 1 }}></div>
+
+      <Menu.Item key="shop" icon={<ShopOutlined />}>
         <Link to="/shop">Shop</Link>
+      </Menu.Item>
+      <Menu.Item key="cart" icon={<ShoppingCartOutlined />}>
+        <Link to="/cart">
+          <Badge count={cart.length} offset={(9, 0)}>
+            Cart
+          </Badge>
+        </Link>
       </Menu.Item>
 
       {/* ถ้าไม่มี user จะแสดง register  */}
@@ -58,6 +70,9 @@ const Navbar = () => {
             icon={<CaretDownOutlined />}
             title={user.username}
           >
+            <Menu.Item icon={<DashboardTwoTone />} key="setting:5">
+              <Link to="/user/index">Dashboard</Link>
+            </Menu.Item>
             <Menu.Item
               icon={<LogoutOutlined />}
               key="setting:1"

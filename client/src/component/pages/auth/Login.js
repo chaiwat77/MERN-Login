@@ -6,12 +6,13 @@ import { login } from "../../functions/auth";
 
 // redux
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  console.log(location.state);
   const [value, setValue] = useState({
     username: "",
     password: "",
@@ -20,11 +21,16 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const roleBaseRedirect = (role) => {
-    console.log(role);
-    if (role === "admin") {
-      navigate("/admin/index");
+    let intended = location.state;
+    // console.log(role);
+    if (intended) {
+      navigate("../" + intended);
     } else {
-      navigate("/user/index");
+      if (role === "admin") {
+        navigate("/admin/index");
+      } else {
+        navigate("/user/index");
+      }
     }
   };
 

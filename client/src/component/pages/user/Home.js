@@ -1,11 +1,22 @@
-import React from 'react'
+import React from "react";
+import MenubarUser from "../../layouts/MenubarUser";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home User</h1>
-      </div>
-  )
-}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <MenubarUser />
+        </div>
 
-export default Home
+        <div class="col">
+          <div className="row">
+            <h2>home user</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
