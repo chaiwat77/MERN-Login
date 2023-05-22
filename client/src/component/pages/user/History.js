@@ -2,6 +2,27 @@ import React, { useState, useEffect } from "react";
 import MenubarUser from "../../layouts/MenubarUser";
 import { useSelector } from "react-redux";
 import { getOrder } from "../../functions/users";
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
+
+// Create styles
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4",
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+});
 
 const History = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -24,9 +45,62 @@ const History = () => {
           <MenubarUser />
         </div>
 
-        <div class="col">
+        <div class="col text-center">
           <div className="row">
             <h2>History</h2>
+            {/* การ loop ซ้อน loop */}
+            {/* 1 loop order card */}
+            {orders.map((item, index) => {
+              console.log(item);
+              return (
+                <div className="card m-3" key={index}>
+                  <p>Order {"    " + item.orderstatus}</p>
+                  <table className="table table-bordered">
+                    <thead>
+                      <tr>
+                        <td>Title</td>
+                        <td>Price</td>
+                        <td>Count</td>
+                      </tr>
+                    </thead>
+                    {/* 2 Loop Table */}
+                    {item.products.map((p, i) => (
+                      <tr>
+                        <td>{p.product.title}</td>
+                        <td>{p.price}</td>
+                        <td>{p.count}</td>
+                      </tr>
+                    ))}
+                    <tr>
+                      <td colSpan={3}>Summary: {item.cartTotal}</td>
+                    </tr>
+                  </table>
+                  {/* PDF */}
+                  <div className="row">
+                    <div className="col">
+                      <PDFDownloadLink
+                        document={
+                          <Document>
+                            <Page size="A4" style={styles.page}>
+                              <View style={styles.section}>
+                                <Text>Section #1</Text>
+                              </View>
+                              <View style={styles.section}>
+                                <Text>Section #2</Text>
+                              </View>
+                            </Page>
+                          </Document>
+                        }
+                        fileName="invoice.pdf"
+                        className="btn btn-primary m-1"
+                      >
+                        PDF Download
+                      </PDFDownloadLink>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
