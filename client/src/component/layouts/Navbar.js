@@ -70,9 +70,16 @@ const Navbar = () => {
             icon={<CaretDownOutlined />}
             title={user.username}
           >
-            <Menu.Item icon={<DashboardTwoTone />} key="setting:5">
-              <Link to="/user/index">Dashboard</Link>
-            </Menu.Item>
+            {user.role == "admin" ? (
+              <Menu.Item icon={<DashboardTwoTone />} key="setting:5">
+                <Link to="/admin/index">Dashboard</Link>
+              </Menu.Item>
+            ) : (
+              <Menu.Item icon={<DashboardTwoTone />} key="setting:5">
+                <Link to="/user/index">Dashboard</Link>
+              </Menu.Item>
+            )}
+
             <Menu.Item
               icon={<LogoutOutlined />}
               key="setting:1"

@@ -17,6 +17,9 @@ const MenubarAdmin = () => {
         <li class="nav-item">
           <Link to="/admin/create-product">เพิ่ม Product</Link>
         </li>
+        <li class="nav-item">
+          <Link to="/admin/orders">Order Manage</Link>
+        </li>
       </ul>
     </nav>
   );
