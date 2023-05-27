@@ -51,7 +51,7 @@ function App() {
           payload: {
             token: idtoken,
             username: res.data.username,
-            rolse: res.data.role,
+            role: res.data.role,
           },
         });
       })

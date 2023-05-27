@@ -19,7 +19,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, cart } = useSelector((state) => ({ ...state }));
-  // console.log(user);
+  console.log(user);
   const { SubMenu } = Menu;
 
   const logout = () => {
@@ -71,7 +71,7 @@ const Navbar = () => {
             title={user.username}
           >
             {user.role == "admin" ? (
-              <Menu.Item icon={<DashboardTwoTone />} key="setting:5">
+              <Menu.Item icon={<DashboardTwoTone />} key="setting:4">
                 <Link to="/admin/index">Dashboard</Link>
               </Menu.Item>
             ) : (
