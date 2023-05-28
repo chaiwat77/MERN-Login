@@ -64,13 +64,13 @@ const CreateProduct = () => {
   };
 
   return (
-    <div class="container-fluid">
-      <div clsas="row">
-        <div class="col-md-2">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-2">
           <MenubarAdmin />
         </div>
-        <br />
-        <div class="col">
+
+        <div className="col">
           {loading ? (
             <h1>
               Loading..... <Spin size="large" />
